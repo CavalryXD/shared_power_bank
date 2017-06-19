@@ -6,6 +6,6 @@ private:
 	int battery;
 public:
 	PowBank(int pow_bank_idf, int battery);
-	int Consume();
-	bool Charge();
+	int Consume(); // 消耗电量
+	bool Charge(); // 充电
 };

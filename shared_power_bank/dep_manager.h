@@ -1,6 +1,10 @@
 #pragma once
+#include "pow_bank_dep.h"
+#include <set>
 using namespace std;
-class DepositryMng
+class DepositoryMng
 {
-
+public:
+	set<PowBankDepository&> GetNeighborDep(pair<float, float> coordinate); // 返回附近的存放机，  参数为用户坐标
+	int GetChkCode(PowBankDepository& selected_dep); // 用户以选择的存放机为参数得到验证码
 };
