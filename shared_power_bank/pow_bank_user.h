@@ -8,14 +8,14 @@ using namespace std;
 class PowUser {
 public:
 	PowUser() = default;
-	void get_info(string s);			//从数据库获取用户信息
-	void get_location();				//得到当前位置
-	void choose_pow_dep();				//选择存放机
-	void get_chk_code();				//从存放机管理系统得到验证码
-	int show_chk_code();				//返回验证码给借出存放机
-	void return_pow();					//归还充电宝
-	void create_order();				//形成订单
-	void calculate_cost();				//计算费用
+	void GetInfo(string s);			//从数据库获取用户信息
+	void GetLocation();				//得到当前位置
+	void ChoosePowDep();				//选择存放机
+	void GetChkCode();				//从存放机管理系统得到验证码
+	int ShowChkCode();				//返回验证码给借出存放机
+	void ReturnPow();					//归还充电宝
+	void CreateOrder();				//形成订单
+	void CalculateCost();				//计算费用
 
 private:
 	string user_name;
