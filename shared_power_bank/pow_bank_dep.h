@@ -19,4 +19,5 @@ public:
 	//bool IdfCheckCode(int ck);
 	PowBank& LendPowBank(int ck);
 	void ReturnPowBank(PowBank&);
+	//
 };
