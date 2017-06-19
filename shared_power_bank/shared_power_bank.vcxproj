@@ -146,6 +146,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="pow_bank.h" />
+    <ClInclude Include="pow_bank_dep.h" />
+    <ClInclude Include="dep_manager.h" />
+    <ClInclude Include="location_service.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="location_service.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
