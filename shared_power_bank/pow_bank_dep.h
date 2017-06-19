@@ -9,8 +9,8 @@ private:
 	string dep_loc_name;
 	pair<float, float> coordinate;
 	int pow_bank_num;
-	set<int> chk_codes;
-	set<PowBank&> depoitry;
+	set<int> chk_codes;				
+	set<PowBank&> depoitry;			
 public:
 	PowBankDepositry() = default;
 	PowBankDepositry(int dep_idf, string dep_loc_name, pair<float,float> coordinate, int pow_bank_num,

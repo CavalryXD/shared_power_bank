@@ -150,6 +150,7 @@
     <ClInclude Include="pow_bank_dep.h" />
     <ClInclude Include="dep_manager.h" />
     <ClInclude Include="location_service.h" />
+    <ClInclude Include="pow_bank_user.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="location_service.cpp" />
