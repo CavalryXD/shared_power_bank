@@ -5,16 +5,16 @@
 
 using namespace std;
 
-class PowUser {
+class PowBankUser {
 public:
-	PowUser() = default;
-	void GetInfo(string s);			//从数据库获取用户信息
-	void GetLocation();				//得到当前位置
+	PowBankUser() = default;
+	void GetInfo(string,string);		//从数据库获取用户信息
+	void GetLocation();					//得到当前位置
 	void ChoosePowDep();				//选择存放机
-	void GetChkCode();				//从存放机管理系统得到验证码
-	int ShowChkCode();				//返回验证码给借出存放机
+	void GetChkCode();					//从存放机管理系统得到验证码
+	int ShowChkCode();					//返回验证码给借出存放机
 	void ReturnPow();					//归还充电宝
-	void CreateOrder();				//形成订单
+	void CreateOrder();					//形成订单
 	void CalculateCost();				//计算费用
 
 private:
@@ -25,6 +25,6 @@ private:
 	float balance;						//用户余额
 	//bool get_pow;						//判断用户是否借了充电宝
 	int pow_deposit_number;				//用户选择的存放机
-	PowBank user_pow;					//用户所借的充电宝
-	PowBankDepository chosen_dep;		//用户所选择的存放机
+	PowBank &user_pow;					//用户所借的充电宝
+	PowBankDepository &chosen_dep;		//用户所选择的存放机
 };
