@@ -16,13 +16,14 @@ void PowBankUser::GetLocation() {
 void PowBankUser::ChoosePowDep() {
 	vector<PowBankDepository&> vec=DepositoryMng::GetNeighborDep(current_location);
 	cout << "以下是您周围的充电宝存放点" << endl;
-	//cout<<
+	//输出周围的充电宝
 	for (auto p : vec) {
 		cout << p.dep_idf() << " " << dep_loc_name() << " "
 			<< coordinate().first << "," << coordinate().second << endl;
 	}
-	cout << "请输入您想选择哪一个存放机" << endl;
+	cout << "请输入您想选择的存放机的编号" << endl;
 	int number;
+	cin >> number;			//存放机编号
 
 
 }
