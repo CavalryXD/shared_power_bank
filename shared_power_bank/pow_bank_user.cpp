@@ -31,16 +31,27 @@ void PowBankUser::GetChkCode() {
 	chk_code = DepositoryMng::GetChkCode(*chosen_dep);
 }
 int PowBankUser::ShowChkCode() {
+	cout << "您的验证码是："<< chk_code << endl;
 	return chk_code;
 }
 void PowBankUser::BorrowPow() {
-	user_pow = &(chosen_dep->LendPowBank(chk_code));
+	user_pow = chosen_dep->LendPowBank(chk_code);
+	/*while (user_pow == nullptr) {
+		cout << "您输入的验证码不正确";
+		cout << "是否要重新输入? yes or no" << endl;
+		string judge;
+		cin >> judge;
+		if (judge == "yes") {
 
+		}
+		else
+			break;
+	}*/
 }
 void PowBankUser::ReturnPow() {
-
+	user_pow = nullptr;
 }
-void PowBankUser::CreateOrder() {
+void PowBankUser::CreateOrderform() {
 
 }
 void PowBankUser::CalculateCost() {

@@ -12,7 +12,7 @@ private:
 	pair<float, float> coordinate; // 存放机坐标
 	int pow_bank_num; // 充电宝数量
 	set<int> chk_codes; // 验证码
-	vector<PowBank&> depoitry; // 充电宝集合
+	vector<PowBank> depoitry; // 充电宝集合
 public:
 	PowBankDepository() = default;
 	PowBankDepository(int dep_idf, string dep_loc_name, pair<float,float> coordinate, int pow_bank_num,

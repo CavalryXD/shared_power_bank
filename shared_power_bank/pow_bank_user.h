@@ -15,7 +15,7 @@ public:
 	int ShowChkCode();					//返回验证码给借出存放机
 	void BorrowPow();					//从存放机借一个充电宝
 	void ReturnPow();					//归还充电宝
-	void CreateOrder();					//形成订单
+	void CreateOrderform();				//形成订单
 	void CalculateCost();				//计算费用
 
 private:
