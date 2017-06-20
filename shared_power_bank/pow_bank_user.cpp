@@ -4,6 +4,7 @@
 #include "pow_bank_user.h"
 #include "location_service.h"
 #include "dep_manager.h"
+#include "pow_bank_dep.h"
 using namespace std;
 
 void PowBankUser::GetInfo(string name, string phone_number) {
@@ -23,14 +24,17 @@ void PowBankUser::ChoosePowDep() {
 	}
 	cout << "请输入您想选择的存放机的编号" << endl;
 	int number;
-	cin >> number;			//存放机编号
-
-
+	cin >> number;						//存放机编号
+	chosen_dep = &vec[number - 1];		//暂定选择存放机的方法
 }
 void PowBankUser::GetChkCode() {
-
+	chk_code = DepositoryMng::GetChkCode(*chosen_dep);
 }
 int PowBankUser::ShowChkCode() {
+	return chk_code;
+}
+void PowBankUser::BorrowPow() {
+	user_pow = &(chosen_dep->LendPowBank(chk_code));
 
 }
 void PowBankUser::ReturnPow() {
