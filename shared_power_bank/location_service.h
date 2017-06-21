@@ -8,7 +8,7 @@ class LocService
 public:
 	LocService() = default;
 	static string GetCity(); // return your city
-	static vector<pair<float, float>> GetLoction(); // return a vector that include coordinate pair like (lng, lat)
+	static pair<float, float> GetLoction(); // return a coordinate pair like (lng, lat)
 	static string loc_api_url;
 };
 

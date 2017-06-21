@@ -2,13 +2,12 @@
 #include <string>
 #include "pow_bank.h"
 #include "pow_bank_dep.h"
-
 using namespace std;
 
 class PowUser {
 public:
 	PowUser() = default;
-	void get_info(string s);			//从数据库获取用户信息
+	void GetInfo(string s);			    //从数据库获取用户信息
 	void get_location();				//得到当前位置
 	void choose_pow_dep();				//选择存放机
 	void get_chk_code();				//从存放机管理系统得到验证码
