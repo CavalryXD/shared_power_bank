@@ -2,8 +2,8 @@
 class PowBank
 {
 private:
-	int pow_bank_idf;
-	int battery;
+	int _pow_bank_idf;
+	int _battery;
 public:
 	PowBank() = default;
 	PowBank(int pow_bank_idf, int battery);

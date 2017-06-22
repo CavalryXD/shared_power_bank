@@ -8,9 +8,9 @@ private:
 	int _dep_idf;   //存放机标识符
 	string _dep_loc_name; // 存放机位置名， 如： 小苹果商店旁
 	pair<float, float> _coordinate; // 存放机坐标
-	int pow_bank_num; // 充电宝数量
-	set<int> chk_codes; //验证码
-	vector<PowBank&> depoitry; // 充电宝集合
+	int _pow_bank_num; // 充电宝数量
+	set<int> _chk_codes; //验证码
+	vector<PowBank&> _depoitory; // 充电宝集合
 public:
 	int dep_idf()
 	{

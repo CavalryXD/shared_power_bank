@@ -71,6 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <ReferencePath>C:\Users\asdfw\Documents\Visual Studio 2015\Projects\shared_power_bank\shared_power_bank\easySqlite;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -93,6 +94,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>easySqlite.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -146,6 +148,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="easySqlite\SHA1.h" />
+    <ClInclude Include="easySqlite\SqlCommon.h" />
+    <ClInclude Include="easySqlite\SqlDatabase.h" />
+    <ClInclude Include="easySqlite\SqlField.h" />
+    <ClInclude Include="easySqlite\SqlFieldSet.h" />
+    <ClInclude Include="easySqlite\sqlite3.h" />
+    <ClInclude Include="easySqlite\SqlRecord.h" />
+    <ClInclude Include="easySqlite\SqlRecordSet.h" />
+    <ClInclude Include="easySqlite\sqltable.h" />
+    <ClInclude Include="easySqlite\SqlValue.h" />
+    <ClInclude Include="easySqlite\stdafx.h" />
+    <ClInclude Include="easySqlite\targetver.h" />
     <ClInclude Include="pow_bank.h" />
     <ClInclude Include="pow_bank_dep.h" />
     <ClInclude Include="dep_manager.h" />

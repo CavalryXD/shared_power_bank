@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="头文件\easySqlite">
+      <UniqueIdentifier>{3727c902-8b5f-491f-993b-c7eb22aa9c12}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dep_manager.h">
@@ -29,6 +32,42 @@
     </ClInclude>
     <ClInclude Include="pow_bank_user.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="easySqlite\SHA1.h">
+      <Filter>头文件\easySqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="easySqlite\SqlCommon.h">
+      <Filter>头文件\easySqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="easySqlite\SqlDatabase.h">
+      <Filter>头文件\easySqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="easySqlite\SqlField.h">
+      <Filter>头文件\easySqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="easySqlite\SqlFieldSet.h">
+      <Filter>头文件\easySqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="easySqlite\sqlite3.h">
+      <Filter>头文件\easySqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="easySqlite\SqlRecord.h">
+      <Filter>头文件\easySqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="easySqlite\SqlRecordSet.h">
+      <Filter>头文件\easySqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="easySqlite\sqltable.h">
+      <Filter>头文件\easySqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="easySqlite\SqlValue.h">
+      <Filter>头文件\easySqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="easySqlite\stdafx.h">
+      <Filter>头文件\easySqlite</Filter>
+    </ClInclude>
+    <ClInclude Include="easySqlite\targetver.h">
+      <Filter>头文件\easySqlite</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
