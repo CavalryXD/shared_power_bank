@@ -108,6 +108,6 @@ void PowBankUser::ReturnPow() {
 void PowBankUser::CreateOrderform() {
 
 }
-float PowBankUser::CalculateCost(time_t t1,time_t t2) {
-	return (t2 - t1)*0.01;
+float PowBankUser::CalculateCost() {
+	return 1;
 }

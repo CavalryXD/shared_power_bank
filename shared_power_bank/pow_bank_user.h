@@ -22,7 +22,7 @@ public:
 	bool IfGetPowDep();					//判断用户是否选择了存放及
 	void ReturnPow();					//归还充电宝
 	void CreateOrderform();				//形成订单
-	float CalculateCost(time_t t1, time_t t2);				//计算费用
+	float CalculateCost();				//计算费用
 
 private:
 	string user_name;

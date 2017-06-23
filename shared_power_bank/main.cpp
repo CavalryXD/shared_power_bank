@@ -209,7 +209,7 @@ case22:
 	case 0:
 		return 0;
 	case 1:
-		cout << "你本次消费的金额为：" <<user.CalculateCost(begin,end)<< endl;
+		cout << "你本次消费的金额为：" <<user.CalculateCost()<< endl;
 		break;
 	case 2:
 		user.ShowMoney();
