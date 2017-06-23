@@ -7,9 +7,11 @@ using namespace std;
 class PowBankUser{
 public:
 	PowBankUser():user_pow(nullptr),chosen_dep(nullptr),get_pow(false){}
-	void GetInfo(string,string);		//从数据库获取用户信息
+	void GetInfo(string,string,string);		//从数据库获取用户信息
+	void ShowInfo();					//显示的用户个人信息
 	void GetLocation();					//得到当前位置
 	void GetMoney(float);				//getmoney
+	void ShowMoney();					//显示当前余额
 	void ChoosePowDep();				//选择存放机
 	void GetChkCode();					//从存放机管理系统得到验证码
 	int ShowChkCode();					//返回验证码给借出存放机
@@ -22,6 +24,7 @@ public:
 private:
 	string user_name;
 	string user_phone_number;
+	string password;
 	pair<float, float> current_location;
 	int chk_code;						//用户得到的验证码
 	float balance;						//用户余额

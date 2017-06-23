@@ -10,8 +10,9 @@ int optcode;
 using namespace std;
 int main() {
 
+	
+	/*
 	PowBankUser user;
-
 	cout << "欢迎使用XX共享充电宝" << endl;
 	cout << "[0] 退出程序		[1] 登陆			[2] 注册" << endl;
 	re_input1:
@@ -113,9 +114,11 @@ int main() {
 	default:
 		;
 	}
-
+	*/
 	//新版本
-	vector<vector<string>> all_interface;
+	PowBankUser user;
+	string name, number;		//用户要存储的姓名和电话
+	vector<vector<string>> interface;
 	cout << "欢迎来到XX共享充电宝！！！" << endl;
 	//cout << "本程序包含一下界面" << endl;
 	//  退出程序
@@ -125,11 +128,29 @@ int main() {
 	// 3 借还界面
 	// 4 支付界面
 	
-	all_interface.push_back(vector<string>{"退出程序", "显示您当前位置"});
-	all_interface.push_back(vector<string>{"显示用户信息","显示当前余额"});
-	all_interface.push_back(vector<string>{"显示当前位置","选择存放机"});
-	all_interface.push_back(vector<string>{"接一个充电宝","归还一个充电宝","显示当前验证码"});
-	all_interface.push_back(vector<string>{"查看本次消费金额","查看您的余额"});
+	interface.push_back(vector<string>{"退出程序", "注册新用户","现在登陆"});
+	//登陆后直接进入用户界面
+	interface.push_back(vector<string>{"退出程序", "显示您当前位置", "显示用户信息","显示当前余额","回到开始界面"});
+	interface.push_back(vector<string>{"退出程序", "显示当前位置","选择存放机","打开借还界面"});
+	interface.push_back(vector<string>{"退出程序", "接一个充电宝","归还一个充电宝","显示当前验证码","回到选择存放机器界面","回到开始界面","打开支付界面"});
+	interface.push_back(vector<string>{"退出程序", "查看本次消费金额","查看您的余额","回到开始界面"});
+	
+
+	cout << "当前界面为入口界面，您可选择以下操作:" << endl;
+	int i = 0;
+	for (auto c : interface[0]) {
+		cout <<"["<<i++<<"]"<<"	"<< c << endl;
+	}
+	cin >> optcode;
+	switch (optcode) {
+	case 0:
+		return 0;
+	case 1:
+		;
+	case 2:
+		;
+	}
+
 
 
 

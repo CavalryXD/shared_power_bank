@@ -7,12 +7,23 @@
 
 using namespace std;
 
-void PowBankUser::GetInfo(string name, string phone_number) {
+void PowBankUser::GetInfo(string name, string phone_number,string user_password) {
 	user_name = name;
+	password = user_password;
 	user_phone_number = phone_number;
+}
+void PowBankUser::ShowInfo() {
+	cout << "您的姓名为" << user_name << endl;
+	cout << "您的电话号码为" << user_phone_number << endl;
 }
 void PowBankUser::GetLocation() {
 	current_location = LocService::GetLocation();
+}
+void PowBankUser::GetMoney(float t) {
+	balance = t;
+}
+void PowBankUser::ShowMoney() {
+	cout << "您当前的余额为：" << balance << endl;
 }
 void PowBankUser::ChoosePowDep() {
 	vector<PowBankDepository*> vec=DepositoryMng::GetNeighborDep(current_location);
@@ -56,9 +67,7 @@ void PowBankUser::ReturnPow() {
 	get_pow = false;
 	user_pow = nullptr;
 }
-void PowBankUser::GetMoney(float) {
 
-}
 void PowBankUser::CreateOrderform() {
 
 }
