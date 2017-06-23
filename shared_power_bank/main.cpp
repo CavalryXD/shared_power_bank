@@ -24,7 +24,7 @@ int main() {
 	
 	interface.push_back(vector<string>{"退出程序", "注册新用户","现在登陆"});
 	//登陆后直接进入用户界面
-	interface.push_back(vector<string>{"退出程序", "显示用户信息","显示当前余额","打开选择存放机界面"});
+	interface.push_back(vector<string>{"退出程序", "显示用户信息","显示以往的验证码","显示当前余额","打开选择存放机界面"});
 	interface.push_back(vector<string>{"退出程序", "选择存放机","打开借还界面"});
 	interface.push_back(vector<string>{"退出程序", "借一个充电宝","归还一个充电宝","显示当前验证码","回到选择存放机器界面","回到用户界面","打开支付界面"});
 	interface.push_back(vector<string>{"退出程序", "查看本次消费金额","查看您的余额","回到用户界面"});
@@ -107,6 +107,9 @@ int main() {
 			goto user_;
 		break;
 	case 2:
+		user.ShowChkCode();
+		break;
+	case 3:
 		user.ShowMoney();
 		cout << "是否返回到用户界面？ 0 or 1" << endl;
 		cin >> optcode;
@@ -115,7 +118,7 @@ int main() {
 		if (optcode == 1)
 			goto user_;
 		break;
-	case 3:
+	case 4:
 		goto repositry;
 	default:
 		return 0;
@@ -123,7 +126,7 @@ int main() {
 
 	//存放机界面
 repositry:
-	cout << "当前界面为选择存放机器界面，您可选择以下操作:" << endl;
+	cout << "选择存放机，您可选择以下操作:" << endl;
 	i = 0;
 	for (auto c : interface[2]) {
 		cout << "[" << i++ << "]" << "	" << c << endl;
@@ -192,7 +195,13 @@ case22:
 	case 5:
 		goto user_;
 	case 6:
-		goto pay;
+		if (user.IfReturn())
+			goto pay;
+		else
+		{
+			cout << "您还没有归还充电宝，请先归还" << endl;
+			goto case22;
+		}
 	default:
 		return 0;
 	}

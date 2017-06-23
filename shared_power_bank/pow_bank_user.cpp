@@ -46,7 +46,6 @@ void PowBankUser::ShowInfo() {
 	cout << "您的电话号码为" << user_phone_number << endl;
 	GetLocation();
 	cout << "您当前的位置为：" << current_location.first << "," << current_location.second << endl;
-
 }
 void PowBankUser::GetLocation() {
 	current_location = LocService::GetLocation();
@@ -90,16 +89,21 @@ void PowBankUser::BorrowPow() {
 		else
 			break;
 	}*/
+	times++;
 	get_pow = true;
 
 }
 bool PowBankUser::IfGetPow() {
 	return get_pow;
 }
+bool PowBankUser::IfReturn() {
+	return times>=2;
+}
 bool  PowBankUser::IfGetPowDep(){
 	return chosen_dep != nullptr;
 }
 void PowBankUser::ReturnPow() {
+	times++;
 	get_pow = false;
 	user_pow = nullptr;
 	CreateOrderform();

@@ -19,6 +19,7 @@ public:
 	int ShowChkCode();					//返回验证码给借出存放机
 	void BorrowPow();					//从存放机借一个充电宝
 	bool IfGetPow();					//判断用户是否借了充电宝
+	bool IfReturn();					//判断用户是否归还充电宝
 	bool IfGetPowDep();					//判断用户是否选择了存放及
 	void ReturnPow();					//归还充电宝
 	void CreateOrderform();				//形成订单
@@ -28,6 +29,7 @@ private:
 	string user_name;
 	string user_phone_number;
 	string password;
+	int times;							//借还次数
 	pair<float, float> current_location;
 	int chk_code;						//用户得到的验证码
 	float balance;						//用户余额
