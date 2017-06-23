@@ -1,14 +1,12 @@
 #pragma once
-#include <map>
-#include <string>
-#include <vector>
+#include <iostream>
 using namespace std;
 class LocService
 {
 public:
 	LocService() = default;
-	static string GetCity(); // return your city
-	static pair<float, float> GetLocation(); // return a vector that include coordinate pair like (lng, lat)
+	static string GetCity();  //return your city
+	static pair<float, float> GetLocation();  //return a vector that include coordinate pair like (lng, lat)
 	static string loc_api_url;
 };
 

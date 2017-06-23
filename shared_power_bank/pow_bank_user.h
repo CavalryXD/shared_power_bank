@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include "pow_bank.h"
 #include "pow_bank_dep.h"
 
 using namespace std;
@@ -10,6 +9,7 @@ public:
 	PowBankUser():user_pow(nullptr),chosen_dep(nullptr){}
 	void GetInfo(string,string);		//从数据库获取用户信息
 	void GetLocation();					//得到当前位置
+	void GetMoney(float);				//getmoney
 	void ChoosePowDep();				//选择存放机
 	void GetChkCode();					//从存放机管理系统得到验证码
 	int ShowChkCode();					//返回验证码给借出存放机

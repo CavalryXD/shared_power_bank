@@ -75,12 +75,18 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+    <LibraryPath>C:\Users\xd\Desktop\jsoncpp-master\build\vs71\debug\lib_json;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\xd\Desktop\jsoncpp-master\include\json;C:\Users\xd\Desktop\jsoncpp-master\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
+    <LibraryPath>C:\Users\xd\Desktop\jsoncpp-master\build\vs71\release\lib_json;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\xd\Desktop\jsoncpp-master\include\json;C:\Users\xd\Desktop\jsoncpp-master\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -105,10 +111,12 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>json_vc71_libmtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -139,15 +147,28 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>json_vc71_libmt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\Desktop\jsoncpp-master\include\json\allocator.h" />
+    <ClInclude Include="..\..\..\..\Desktop\jsoncpp-master\include\json\assertions.h" />
+    <ClInclude Include="..\..\..\..\Desktop\jsoncpp-master\include\json\autolink.h" />
+    <ClInclude Include="..\..\..\..\Desktop\jsoncpp-master\include\json\config.h" />
+    <ClInclude Include="..\..\..\..\Desktop\jsoncpp-master\include\json\features.h" />
+    <ClInclude Include="..\..\..\..\Desktop\jsoncpp-master\include\json\forwards.h" />
+    <ClInclude Include="..\..\..\..\Desktop\jsoncpp-master\include\json\json.h" />
+    <ClInclude Include="..\..\..\..\Desktop\jsoncpp-master\include\json\reader.h" />
+    <ClInclude Include="..\..\..\..\Desktop\jsoncpp-master\include\json\value.h" />
+    <ClInclude Include="..\..\..\..\Desktop\jsoncpp-master\include\json\version.h" />
+    <ClInclude Include="..\..\..\..\Desktop\jsoncpp-master\include\json\writer.h" />
     <ClInclude Include="easySqlite\SHA1.h" />
     <ClInclude Include="easySqlite\SqlCommon.h" />
     <ClInclude Include="easySqlite\SqlDatabase.h" />
@@ -167,8 +188,19 @@
     <ClInclude Include="pow_bank_user.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\Desktop\jsoncpp-master\src\lib_json\json_reader.cpp" />
+    <ClCompile Include="..\..\..\..\Desktop\jsoncpp-master\src\lib_json\json_value.cpp" />
+    <ClCompile Include="..\..\..\..\Desktop\jsoncpp-master\src\lib_json\json_writer.cpp" />
+    <ClCompile Include="dep_manager.cpp" />
     <ClCompile Include="location_service.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="pow_bank.cpp" />
+    <ClCompile Include="pow_bank_dep.cpp" />
     <ClCompile Include="pow_bank_user.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\..\..\..\Desktop\jsoncpp-master\build\vs71\debug\lib_json\json_vc71_libmtd.lib" />
+    <Library Include="..\..\..\..\Desktop\jsoncpp-master\build\vs71\release\lib_json\json_vc71_libmt.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

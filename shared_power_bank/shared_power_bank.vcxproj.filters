@@ -16,6 +16,12 @@
     <Filter Include="头文件\easySqlite">
       <UniqueIdentifier>{3727c902-8b5f-491f-993b-c7eb22aa9c12}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\include/json">
+      <UniqueIdentifier>{a55435d6-8b01-447d-b336-5e30b44bcf37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\json/cpp">
+      <UniqueIdentifier>{23d8e51b-8cb3-4f02-85e9-72d08a6281f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dep_manager.h">
@@ -69,6 +75,39 @@
     <ClInclude Include="easySqlite\targetver.h">
       <Filter>头文件\easySqlite</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\jsoncpp-master\include\json\allocator.h">
+      <Filter>头文件\include/json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\jsoncpp-master\include\json\assertions.h">
+      <Filter>头文件\include/json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\jsoncpp-master\include\json\autolink.h">
+      <Filter>头文件\include/json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\jsoncpp-master\include\json\config.h">
+      <Filter>头文件\include/json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\jsoncpp-master\include\json\features.h">
+      <Filter>头文件\include/json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\jsoncpp-master\include\json\forwards.h">
+      <Filter>头文件\include/json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\jsoncpp-master\include\json\json.h">
+      <Filter>头文件\include/json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\jsoncpp-master\include\json\reader.h">
+      <Filter>头文件\include/json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\jsoncpp-master\include\json\value.h">
+      <Filter>头文件\include/json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\jsoncpp-master\include\json\version.h">
+      <Filter>头文件\include/json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\jsoncpp-master\include\json\writer.h">
+      <Filter>头文件\include/json</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="location_service.cpp">
@@ -77,5 +116,34 @@
     <ClCompile Include="pow_bank_user.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Desktop\jsoncpp-master\src\lib_json\json_reader.cpp">
+      <Filter>源文件\json/cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Desktop\jsoncpp-master\src\lib_json\json_value.cpp">
+      <Filter>源文件\json/cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Desktop\jsoncpp-master\src\lib_json\json_writer.cpp">
+      <Filter>源文件\json/cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="pow_bank_dep.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="dep_manager.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="pow_bank.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\..\..\..\Desktop\jsoncpp-master\build\vs71\release\lib_json\json_vc71_libmt.lib">
+      <Filter>头文件\include/json</Filter>
+    </Library>
+    <Library Include="..\..\..\..\Desktop\jsoncpp-master\build\vs71\debug\lib_json\json_vc71_libmtd.lib">
+      <Filter>头文件\include/json</Filter>
+    </Library>
   </ItemGroup>
 </Project>
