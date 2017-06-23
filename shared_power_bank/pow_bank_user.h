@@ -6,8 +6,10 @@ using namespace std;
 
 class PowBankUser{
 public:
-	PowBankUser():user_pow(nullptr),chosen_dep(nullptr),get_pow(false){}
-	void GetInfo(string,string,string);		//从数据库获取用户信息
+	PowBankUser():user_pow(nullptr),chosen_dep(nullptr),get_pow(false), user_name(" "), user_phone_number(" "), password(" "){}
+	bool SignUp();						//用户注册	
+	bool SignIn();						//用户登录
+	void GetInfo(string,string,string);	//从数据库获取用户信息
 	void ShowInfo();					//显示的用户个人信息
 	void GetLocation();					//得到当前位置
 	void GetMoney(float);				//getmoney
@@ -17,9 +19,10 @@ public:
 	int ShowChkCode();					//返回验证码给借出存放机
 	void BorrowPow();					//从存放机借一个充电宝
 	bool IfGetPow();					//判断用户是否借了充电宝
+	bool IfGetPowDep();					//判断用户是否选择了存放及
 	void ReturnPow();					//归还充电宝
 	void CreateOrderform();				//形成订单
-	void CalculateCost();				//计算费用
+	float CalculateCost(time_t t1, time_t t2);				//计算费用
 
 private:
 	string user_name;

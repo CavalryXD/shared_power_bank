@@ -6,7 +6,36 @@
 #include "dep_manager.h"
 
 using namespace std;
-
+bool PowBankUser::SignUp() {
+	int code;
+	cout << "请输入您的名字，电话号码和密码，中间用回车分隔" << endl;
+	cout << "请输入您的名字：";
+	cin >> user_name;
+	cout << "请输入您的电话号码：";
+	cin >> user_phone_number;
+	cout << "请输入您的密码：";
+	cin >> password;
+	/*get给数据库发送信息核对信息
+	if (xxx)  {
+	return true;
+	}
+	if (!xxx) {
+	return false;
+	}
+	*/
+	return true;
+	return false;
+}
+bool PowBankUser::SignIn() {
+	string name;
+	string word;
+	//get请求
+	return true;
+	if (name == user_name&&word == password)
+		return true;
+	else
+		return false;
+}
 void PowBankUser::GetInfo(string name, string phone_number,string user_password) {
 	user_name = name;
 	password = user_password;
@@ -15,6 +44,9 @@ void PowBankUser::GetInfo(string name, string phone_number,string user_password)
 void PowBankUser::ShowInfo() {
 	cout << "您的姓名为" << user_name << endl;
 	cout << "您的电话号码为" << user_phone_number << endl;
+	GetLocation();
+	cout << "您当前的位置为：" << current_location.first << "," << current_location.second << endl;
+
 }
 void PowBankUser::GetLocation() {
 	current_location = LocService::GetLocation();
@@ -59,18 +91,23 @@ void PowBankUser::BorrowPow() {
 			break;
 	}*/
 	get_pow = true;
+
 }
 bool PowBankUser::IfGetPow() {
 	return get_pow;
 }
+bool  PowBankUser::IfGetPowDep(){
+	return chosen_dep != nullptr;
+}
 void PowBankUser::ReturnPow() {
 	get_pow = false;
 	user_pow = nullptr;
+	CreateOrderform();
 }
 
 void PowBankUser::CreateOrderform() {
 
 }
-void PowBankUser::CalculateCost() {
-
+float PowBankUser::CalculateCost(time_t t1,time_t t2) {
+	return (t2 - t1)*0.01;
 }
