@@ -18,14 +18,14 @@ void PowBankUser::ChoosePowDep() {
 	vector<PowBankDepository*> vec=DepositoryMng::GetNeighborDep(current_location);
 	cout << "以下是您周围的充电宝存放点" << endl;
 	//输出周围的充电宝
-	for (auto p : vec) {
+//	for (auto p : vec) {
 //		cout << p.dep_idf() << " " << dep_loc_name() << " "
 //			<< coordinate().first << "," << coordinate().second << endl;
-	}
+//	}
 	cout << "请输入您想选择的存放机的编号" << endl;
 	int number;
 	cin >> number;						//存放机编号
-	chosen_dep = vec[number - 1];		//暂定选择存放机的方法
+//	chosen_dep = vec[number - 1];		//暂定选择存放机的方法
 }
 void PowBankUser::GetChkCode() {
 	chk_code = DepositoryMng::GetChkCode(*chosen_dep);
@@ -47,8 +47,13 @@ void PowBankUser::BorrowPow() {
 		else
 			break;
 	}*/
+	get_pow = true;
+}
+bool PowBankUser::IfGetPow() {
+	return get_pow;
 }
 void PowBankUser::ReturnPow() {
+	get_pow = false;
 	user_pow = nullptr;
 }
 void PowBankUser::GetMoney(float) {

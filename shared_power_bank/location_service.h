@@ -10,4 +10,4 @@ public:
 	static string loc_api_url;
 };
 
-string LocService::loc_api_url = "http://restapi.amap.com/v3/ip?key=52f41ecb8481df329c89b0e2cfbaf0c4";
+//string LocService::loc_api_url = "http://restapi.amap.com/v3/ip?key=52f41ecb8481df329c89b0e2cfbaf0c4";
