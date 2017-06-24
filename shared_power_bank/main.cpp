@@ -45,7 +45,9 @@ int main() {
 		bool sign1 = user.SignUp();
 		//get给数据库发送信息核对信息
 		if (sign1 == true)
+		{
 			cout << "恭喜您，注册成功！" << endl;
+		} 
 		if (sign1 == false) {
 			cout << "对不起，此用户已存在" << endl << "是否要重新注册呢？ 0 or 1" << endl;
 			cin >> optcode;
@@ -98,23 +100,13 @@ int main() {
 		return 0;
 	case 1:
 		user.ShowInfo();
-		cout << "是否返回到用户界面？ 0 or 1" << endl;
-		cin >> optcode;
-		if (optcode == 0)
-			;
-		if (optcode == 1)
 			goto user_;
 		break;
 	case 2:
 		user.ShowChkCode();
-		break;
+		goto user_;
 	case 3:
 		user.ShowMoney();
-		cout << "是否返回到用户界面？ 0 or 1" << endl;
-		cin >> optcode;
-		if (optcode == 0)
-			;
-		if (optcode == 1)
 			goto user_;
 		break;
 	case 4:
@@ -168,9 +160,11 @@ borrowandlend:
 	case 0:
 		return 0;
 case21:
-	case 1:
-		user.ShowChkCode();
-		user.BorrowPow();
+	case 1:			//借
+		if(user.BorrowPow()==true)
+			;
+		else
+			goto borrowandlend;
 		t1=time(&t);
 		goto borrowandlend;
 case22:
@@ -191,7 +185,7 @@ case22:
 		break;
 	case 3:
 		user.ShowChkCode();
-		break;
+		goto borrowandlend;
 	case 4:
 		goto repositry;
 	case 5:

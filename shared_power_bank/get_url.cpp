@@ -59,10 +59,7 @@ Json::Value GetUrl::Get(const string url) {
 	string jdata(begin, end + 1);
 	Json::Reader reader;
 	Json::Value value;
-	//if (reader.parse(jdata, value)) {
-	//	cout << "当前位置    " << value[0]["coordinate"]["lng"].asString() << endl;
-	//}
-	reader.parse(jdata, value);
+	reader.parse(jdata, value);				//解析Json
 	closesocket(sclient);
 	WSACleanup();
 	return value;

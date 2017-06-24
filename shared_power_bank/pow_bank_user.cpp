@@ -6,24 +6,26 @@
 #include "dep_manager.h"
 
 using namespace std;
-bool PowBankUser::SignUp() {
-	cout << "请输入您的名字，电话号码和密码，中间用回车分隔" << endl;
+bool PowBankUser::SignUp() {				//注册
+	cout << "请输入您的名字，email和密码，中间用回车分隔" << endl;
 	cout << "请输入您的名字：";
 	cin >> user_name;
-	cout << "请输入您的电话号码：";
-	cin >> user_phone_number;
+	cout << "请输入您的email：";
+	cin >> user_email;
 	cout << "请输入您的密码：";
 	cin >> password;
 	//get请求
-	string s = "GET /user/register?username=" + user_name + "&passwd=" + password + " HTTP/1.1\nHost:192.168.31.97:5000\n\n";
+	string s = "GET /user/register?username=" + user_name + "&passwd=" + password +"&passwd="+ user_email+" HTTP/1.1\nHost:192.168.31.97:5000\n\n";
 	Json::Value value = GetUrl::Get(s);
 	if (value["status"].asString() == "200")
+	{
 		return true;
+	}
 	if (value["status"].asString() == "404")
 		return false;
 	return false;
 }
-bool PowBankUser::SignIn() {
+bool PowBankUser::SignIn() {			//登陆
 	string name;
 	string word;
 	//get请求
@@ -34,19 +36,24 @@ bool PowBankUser::SignIn() {
 	cin >> word;
 	string s = "GET /user/login?username=" + name + "&passwd=" + word + " HTTP/1.1\nHost:192.168.31.97:5000\n\n";
 	Json::Value value = GetUrl::Get(s);
-	if (value["status"].asString()=="200")
+	if (value["status"].asString() == "200")
+	{
+		user_name = name;
+		password = word;
 		return true;
+	}
 	else
 		return false;
 }
 void PowBankUser::GetInfo(string name, string phone_number,string user_password) {
+	//todo 链接网络
 	user_name = name;
 	password = user_password;
-	user_phone_number = phone_number;
+	user_email = phone_number;
 }
 void PowBankUser::ShowInfo() {
 	cout << "您的姓名为" << user_name << endl;
-	cout << "您的电话号码为" << user_phone_number << endl;
+	cout << "您的email为" << user_email << endl;
 }
 void PowBankUser::GetLocation() {
 	current_location = LocService::GetLocation();
@@ -68,12 +75,13 @@ void PowBankUser::ChoosePowDep() {
 			cout <<"您当前的位置处于：			"<< value["message"][i]["location"].asString()<< "经度：" << value["message"][i]["coordinate"]["lng"].asString() << "纬度：" << value["message"][i]["coordinate"]["lat"].asString() << endl;
 		}
 	cout << "请输入您想选择的存放机的编号" << endl;
-	int number;
+	string number;
 	cin >> number;						//存放机编号
 	pow_deposit_number = number;		//用户所选择的存放机编号
 }
 void PowBankUser::GetChkCode() {
-	string s = "GET /depositories/checkcode/?username=" + user_name+"&id=" + "pow_deposit_number"+ " HTTP/1.1\nHost:192.168.31.97:5000\n\n";
+	string s1 = "xd";
+	string s = "GET /depositories/checkcode?username=" + s1+"&id=" + pow_deposit_number+ " HTTP/1.1\nHost:192.168.31.97:5000\n\n";
 	Json::Value value= GetUrl::Get(s);
 	chk_code = value["message"]["chkcode"].asString();
 }
@@ -81,35 +89,46 @@ string PowBankUser::ShowChkCode() {
 	cout << "您的验证码是："<< chk_code << endl;
 	return chk_code;
 }
-void PowBankUser::BorrowPow() {
-	/*user_pow = chosen_dep->LendPowBank(chk_code);
-
-	while (user_pow == nullptr) {
-		cout << "您输入的验证码不正确";
-		cout << "是否要重新输入? 0 or 1" << endl;
-		string judge;
-		cin >> judge;
-		if (judge == "yes") {
-
-		}
-		else
-			break;
+bool PowBankUser::BorrowPow() {
+	if (times ==1) {
+		cout << "您已经借了一个充电宝了，无法继续借出！" << endl;
+		return false;
 	}
-	times++;
-	get_pow = true;
-	*/
+	int opt;
+	reborrow:
+	string code;
+	cout << "验证码以显示在存放机上，请在当前界面输入验证码" << endl;
+	cin >> code;
+	string s = "GET /depositories/check?chkcode=" + code + "&id=" + pow_deposit_number + " HTTP/1.1\nHost:192.168.31.97:5000\n\n";
+	Json::Value value = GetUrl::Get(s);
+	string status = value["status"].asString();
+	if (status == "200") {
+		cout << "您已成功借出充电宝，请尽快取出！" << endl;
+		chk_code = code;
+		times = 1;
+		get_pow= true;
+		return true;
+	}
+	else {
+		cout << "您输入的验证码有误 需要重新输入吗？ 0 or 1" << endl;
+		cin >> opt;
+		if (opt != 1)
+			return false;
+		if (opt == 1)
+			goto reborrow;
+	}	
 }
 bool PowBankUser::IfGetPow() {
 	return get_pow;
 }
 bool PowBankUser::IfReturn() {
-	return times>=2;
+	return times==2;
 }
 bool  PowBankUser::IfGetPowDep(){
 	return chosen_dep != nullptr;
 }
 void PowBankUser::ReturnPow() {
-	times++;
+	times=2;
 	get_pow = false;
 	user_pow = nullptr;
 }

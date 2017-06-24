@@ -6,7 +6,7 @@ using namespace std;
 
 class PowBankUser{
 public:
-	PowBankUser():user_pow(nullptr),chosen_dep(nullptr),get_pow(false), user_name(" "), user_phone_number(" "), password(" "){}
+	PowBankUser():user_pow(nullptr),chosen_dep(nullptr),get_pow(false), user_name(" "), user_email(" "), password(" "){}
 	bool SignUp();									//用户注册	
 	bool SignIn();									//用户登录
 	void GetInfo(string,string,string);				//从数据库获取用户信息
@@ -17,7 +17,7 @@ public:
 	void ChoosePowDep();							//选择存放机
 	void GetChkCode();								//从存放机管理系统得到验证码
 	string ShowChkCode();							//返回验证码给借出存放机
-	void BorrowPow();								//从存放机借一个充电宝
+	bool BorrowPow();								//从存放机借一个充电宝
 	bool IfGetPow();								//判断用户是否借了充电宝
 	bool IfReturn();								//判断用户是否归还充电宝
 	bool IfGetPowDep();								//判断用户是否选择了存放及
@@ -26,7 +26,7 @@ public:
 
 private:
 	string user_name;
-	string user_phone_number;
+	string user_email;
 	string password;
 	int times;										//借还次数
 	pair<float, float> current_location;			//当前位置
