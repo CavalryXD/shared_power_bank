@@ -9,8 +9,6 @@ private:
 	string _dep_loc_name;				// 存放机位置名， 如： 小苹果商店旁
 	pair<float, float> _coordinate;		// 存放机坐标
 	int _pow_bank_num;					// 充电宝数量
-	vector<int> _chk_codes;    			//验证码
-	vector<PowBank> _depoitory;			// 充电宝集合
 public:
 	int dep_idf()
 	{
@@ -28,8 +26,8 @@ public:
 		return _pow_bank_num;
 	}
 	PowBankDepository() {}
-	PowBankDepository(int dep_idf, string dep_loc_name, pair<float, float> coordinate, int pow_bank_num,
-		vector<int>chk_codes, vector<PowBank> dep);
+	PowBankDepository(int dep_idf, string dep_loc_name, pair<float, float> coordinate,
+		int pow_bank_num) :_dep_idf(dep_idf), _dep_loc_name(dep_loc_name), _coordinate(coordinate), _pow_bank_num(pow_bank_num) {}
 	bool UpdateCheckCode(int new_check_code);
 	//bool IdfCheckCode(int ck); 
 	PowBank LendPowBank(int chk);		// 借出充电宝，参数为用户得到的验证码 

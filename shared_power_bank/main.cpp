@@ -9,7 +9,7 @@ int optcode;			//选择操作
 time_t t1,t2,t;			//借还时间，计算费用
 using namespace std;
 int main() {
-	//新版本
+	//共享充电宝
 	PowBankUser user;
 	string name, number,password;		//用户要存储的姓名和电话
 	vector<vector<string>> user_interface;
