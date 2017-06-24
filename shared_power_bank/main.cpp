@@ -1,42 +1,40 @@
-//#pragma comment(lib,"json_vc71_libmt.lib")
-//#pragma comment(lib,"json_vc71_libmtd.lib")
-#include <iostream>
-#include "pow_bank_user.h"
+ï»¿#pragma comment(lib,"json_vc71_libmt.lib")
+#pragma comment(lib,"json_vc71_libmtd.lib")
 #include <time.h>
 #include <map>
-#include <algorithm>
+#include "pow_bank_user.h"
+#include "get_url.h"
 
-int optcode;			//Ñ¡Ôñ²Ù×÷
-time_t t1,t2,t;		//½è»¹Ê±¼ä£¬¼ÆËã·ÑÓÃ
+int optcode;			//é€‰æ‹©æ“ä½œ
+time_t t1,t2,t;			//å€Ÿè¿˜æ—¶é—´ï¼Œè®¡ç®—è´¹ç”¨
 using namespace std;
 int main() {
-	//ĞÂ°æ±¾
+	//æ–°ç‰ˆæœ¬
 	PowBankUser user;
-	string name, number,password;		//ÓÃ»§Òª´æ´¢µÄĞÕÃûºÍµç»°
-	vector<vector<string>> interface;
-	cout << "»¶Ó­À´µ½XX¹²Ïí³äµç±¦£¡£¡£¡" << endl;
-	//cout << "±¾³ÌĞò°üº¬Ò»ÏÂ½çÃæ" << endl;
-	//  ÍË³ö³ÌĞò
-	// 0 ¿ªÊ¼½çÃæ
-	// 1 ÓÃ»§½çÃæ
-	// 2 Ñ¡Ôñ´æ·Å»ú½çÃæ
-	// 3 ½è»¹½çÃæ
-	// 4 Ö§¸¶½çÃæ
+	string name, number,password;		//ç”¨æˆ·è¦å­˜å‚¨çš„å§“åå’Œç”µè¯
+	vector<vector<string>> user_interface;
+	cout << "æ¬¢è¿æ¥åˆ°å…±äº«å……ç”µå®ï¼ï¼ï¼" << endl;
+	//  é€€å‡ºç¨‹åº
+	// 0 å¼€å§‹ç•Œé¢
+	// 1 ç”¨æˆ·ç•Œé¢
+	// 2 é€‰æ‹©å­˜æ”¾æœºç•Œé¢
+	// 3 å€Ÿè¿˜ç•Œé¢
+	// 4 æ”¯ä»˜ç•Œé¢
 	
-	interface.push_back(vector<string>{"ÍË³ö³ÌĞò", "×¢²áĞÂÓÃ»§","ÏÖÔÚµÇÂ½"});
-	//µÇÂ½ºóÖ±½Ó½øÈëÓÃ»§½çÃæ
-	interface.push_back(vector<string>{"ÍË³ö³ÌĞò", "ÏÔÊ¾ÓÃ»§ĞÅÏ¢","ÏÔÊ¾ÒÔÍùµÄÑéÖ¤Âë","ÏÔÊ¾µ±Ç°Óà¶î","´ò¿ªÑ¡Ôñ´æ·Å»ú½çÃæ"});
-	interface.push_back(vector<string>{"ÍË³ö³ÌĞò", "Ñ¡Ôñ´æ·Å»ú","´ò¿ª½è»¹½çÃæ"});
-	interface.push_back(vector<string>{"ÍË³ö³ÌĞò", "½èÒ»¸ö³äµç±¦","¹é»¹Ò»¸ö³äµç±¦","ÏÔÊ¾µ±Ç°ÑéÖ¤Âë","»Øµ½Ñ¡Ôñ´æ·Å»úÆ÷½çÃæ","»Øµ½ÓÃ»§½çÃæ","´ò¿ªÖ§¸¶½çÃæ"});
-	interface.push_back(vector<string>{"ÍË³ö³ÌĞò", "²é¿´±¾´ÎÏû·Ñ½ğ¶î","²é¿´ÄúµÄÓà¶î","»Øµ½ÓÃ»§½çÃæ"});
+	user_interface.push_back(vector<string>{"é€€å‡ºç¨‹åº", "æ³¨å†Œæ–°ç”¨æˆ·","ç°åœ¨ç™»é™†"});
+	//ç™»é™†åç›´æ¥è¿›å…¥ç”¨æˆ·ç•Œé¢
+	user_interface.push_back(vector<string>{"é€€å‡ºç¨‹åº", "æ˜¾ç¤ºç”¨æˆ·ä¿¡æ¯","æ˜¾ç¤ºä»¥å¾€çš„éªŒè¯ç ","æ˜¾ç¤ºå½“å‰ä½™é¢","æ‰“å¼€é€‰æ‹©å­˜æ”¾æœºç•Œé¢"});
+	user_interface.push_back(vector<string>{"é€€å‡ºç¨‹åº", "é€‰æ‹©å­˜æ”¾æœº","æ‰“å¼€å€Ÿè¿˜ç•Œé¢"});
+	user_interface.push_back(vector<string>{"é€€å‡ºç¨‹åº", "å€Ÿä¸€ä¸ªå……ç”µå®","å½’è¿˜ä¸€ä¸ªå……ç”µå®","æ˜¾ç¤ºå½“å‰éªŒè¯ç ","å›åˆ°é€‰æ‹©å­˜æ”¾æœºå™¨ç•Œé¢","å›åˆ°ç”¨æˆ·ç•Œé¢","æ‰“å¼€æ”¯ä»˜ç•Œé¢"});
+	user_interface.push_back(vector<string>{"é€€å‡ºç¨‹åº", "æŸ¥çœ‹æœ¬æ¬¡æ¶ˆè´¹é‡‘é¢","æŸ¥çœ‹æ‚¨çš„ä½™é¢","å›åˆ°ç”¨æˆ·ç•Œé¢"});
 	
 
-	cout << "µ±Ç°½çÃæÎªÈë¿Ú½çÃæ£¬Äú¿ÉÑ¡ÔñÒÔÏÂ²Ù×÷:" << endl;
+	cout << "å½“å‰ç•Œé¢ä¸ºå…¥å£ç•Œé¢ï¼Œæ‚¨å¯é€‰æ‹©ä»¥ä¸‹æ“ä½œ:" << endl;
 	int i = 0;
-	for (auto c : interface[0]) {
+	for (auto c : user_interface[0]) {
 		cout <<"["<<i++<<"]"<<"	"<< c << endl;
 	}
-	//×¢²áµÇÂ¼½çÃæ
+	//æ³¨å†Œç™»å½•ç•Œé¢
 	cin >> optcode;
 	switch (optcode) {
 	case 0:
@@ -45,18 +43,18 @@ int main() {
 	case 1:
 	{
 		bool sign1 = user.SignUp();
-		//get¸øÊı¾İ¿â·¢ËÍĞÅÏ¢ºË¶ÔĞÅÏ¢
+		//getç»™æ•°æ®åº“å‘é€ä¿¡æ¯æ ¸å¯¹ä¿¡æ¯
 		if (sign1 == true)
-			cout << "¹§Ï²Äú£¬×¢²á³É¹¦£¡" << endl;
+			cout << "æ­å–œæ‚¨ï¼Œæ³¨å†ŒæˆåŠŸï¼" << endl;
 		if (sign1 == false) {
-			cout << "¶Ô²»Æğ£¬´ËÓÃ»§ÒÑ´æÔÚ" << endl << "ÊÇ·ñÒªÖØĞÂ×¢²áÄØ£¿ 0 or 1" << endl;
+			cout << "å¯¹ä¸èµ·ï¼Œæ­¤ç”¨æˆ·å·²å­˜åœ¨" << endl << "æ˜¯å¦è¦é‡æ–°æ³¨å†Œå‘¢ï¼Ÿ 0 or 1" << endl;
 			cin >> optcode;
 			if (optcode == 1)
 				goto case11;
 			else
 				return 0;
 		}
-		cout << "ÇëÎÊÄúÒªÏÖÔÚµÇÂ½Âğ£¿ 0 or 1" << endl;
+		cout << "è¯·é—®æ‚¨è¦ç°åœ¨ç™»é™†å—ï¼Ÿ 0 or 1" << endl;
 		cin >> optcode;
 		if (optcode != 1)
 			return 0;
@@ -67,13 +65,13 @@ int main() {
 	break;
 	case 2:
 	case12:
-		//getÓÚÊı¾İ¿â¼ì²éĞÅÏ¢ÊÇ·ñÒ»ÖÂ
+		//getäºæ•°æ®åº“æ£€æŸ¥ä¿¡æ¯æ˜¯å¦ä¸€è‡´
 	{
 		bool sign2 = user.SignIn();
 		if (sign2 == true)
-			cout << "µÇÂ½³É¹¦£¡¼´½«Ìø×ªµ½ÓÃ»§½çÃæ" << endl;
+			cout << "ç™»é™†æˆåŠŸï¼å³å°†è·³è½¬åˆ°ç”¨æˆ·ç•Œé¢" << endl;
 		else {
-			cout << "ÄúÊäÈëµÄÃÜÂëÓĞÎó£¬ĞèÒªÖØĞÂÊäÈëÂğ£¿ 0 or 1" << endl;
+			cout << "æ‚¨è¾“å…¥çš„å¯†ç æœ‰è¯¯ï¼Œéœ€è¦é‡æ–°è¾“å…¥å—ï¼Ÿ 0 or 1" << endl;
 			cin >> optcode;
 			if (optcode != 1)
 				return 0;
@@ -87,11 +85,11 @@ int main() {
 		
 	}
 
-	//ÓÃ»§½çÃæ
+	//ç”¨æˆ·ç•Œé¢
 	user_:
-	cout << "µ±Ç°½çÃæÎªÓÃ»§½çÃæ£¬Äú¿ÉÑ¡ÔñÒÔÏÂ²Ù×÷:" << endl;
+	cout << "å½“å‰ç•Œé¢ä¸ºç”¨æˆ·ç•Œé¢ï¼Œæ‚¨å¯é€‰æ‹©ä»¥ä¸‹æ“ä½œ:" << endl;
 	i = 0;
-	for (auto c : interface[1]) {
+	for (auto c : user_interface[1]) {
 		cout << "[" << i++ << "]" << "	" << c << endl;
 	}
 	cin >> optcode;
@@ -100,7 +98,7 @@ int main() {
 		return 0;
 	case 1:
 		user.ShowInfo();
-		cout << "ÊÇ·ñ·µ»Øµ½ÓÃ»§½çÃæ£¿ 0 or 1" << endl;
+		cout << "æ˜¯å¦è¿”å›åˆ°ç”¨æˆ·ç•Œé¢ï¼Ÿ 0 or 1" << endl;
 		cin >> optcode;
 		if (optcode == 0)
 			;
@@ -112,7 +110,7 @@ int main() {
 		break;
 	case 3:
 		user.ShowMoney();
-		cout << "ÊÇ·ñ·µ»Øµ½ÓÃ»§½çÃæ£¿ 0 or 1" << endl;
+		cout << "æ˜¯å¦è¿”å›åˆ°ç”¨æˆ·ç•Œé¢ï¼Ÿ 0 or 1" << endl;
 		cin >> optcode;
 		if (optcode == 0)
 			;
@@ -125,11 +123,11 @@ int main() {
 		return 0;
 	}
 
-	//´æ·Å»ú½çÃæ
+	//å­˜æ”¾æœºç•Œé¢
 repositry:
-	cout << "Ñ¡Ôñ´æ·Å»ú£¬Äú¿ÉÑ¡ÔñÒÔÏÂ²Ù×÷:" << endl;
+	cout << "é€‰æ‹©å­˜æ”¾æœºï¼Œæ‚¨å¯é€‰æ‹©ä»¥ä¸‹æ“ä½œ:" << endl;
 	i = 0;
-	for (auto c : interface[2]) {
+	for (auto c : user_interface[2]) {
 		cout << "[" << i++ << "]" << "	" << c << endl;
 	}
 	cin >> optcode;
@@ -144,8 +142,8 @@ repositry:
 		if (user.IfGetPowDep())
 			goto borrowandlend;
 		else {
-			cout << "Äú»¹Ã»ÓĞÑ¡ÔñÒ»¸ö´æ·Å»ú" << endl;
-			cout << "ÊÇ·ñÒªÑ¡ÔñÒ»¸ö´æ·Å»ú? 0 or 1" << endl;
+			cout << "æ‚¨è¿˜æ²¡æœ‰é€‰æ‹©ä¸€ä¸ªå­˜æ”¾æœº" << endl;
+			cout << "æ˜¯å¦è¦é€‰æ‹©ä¸€ä¸ªå­˜æ”¾æœº? 0 or 1" << endl;
 			cin >> optcode;
 			if (optcode == 0) {
 				goto repositry;
@@ -158,11 +156,11 @@ repositry:
 		return 0;
 	}
 
-	//½è»¹½çÃæ
+	//å€Ÿè¿˜ç•Œé¢
 borrowandlend:
-	cout << "µ±Ç°½çÃæÎª½è»¹½çÃæ£¬Äú¿ÉÑ¡ÔñÒÔÏÂ²Ù×÷:" << endl;
+	cout << "å½“å‰ç•Œé¢ä¸ºå€Ÿè¿˜ç•Œé¢ï¼Œæ‚¨å¯é€‰æ‹©ä»¥ä¸‹æ“ä½œ:" << endl;
 	i = 0;
-	for (auto c : interface[3]) {
+	for (auto c : user_interface[3]) {
 		cout << "[" << i++ << "]" << "	" << c << endl;
 	}
 	cin >> optcode;
@@ -182,8 +180,8 @@ case22:
 			t2 = time(&t);
 		}
 		else {
-			cout << "Äú»¹Ã»ÓĞ½è³äµç±¦£¬²»ĞèÒª¹é»¹" << endl;
-			cout << "ÏÖÔÚÈ¥½èÒ»¸ö³äµç±¦£¿ 0 or  1" << endl;
+			cout << "æ‚¨è¿˜æ²¡æœ‰å€Ÿå……ç”µå®ï¼Œä¸éœ€è¦å½’è¿˜" << endl;
+			cout << "ç°åœ¨å»å€Ÿä¸€ä¸ªå……ç”µå®ï¼Ÿ 0 or  1" << endl;
 			cin >> optcode;
 			if (optcode == 0)
 				goto borrowandlend;
@@ -203,18 +201,18 @@ case22:
 			goto pay;
 		else
 		{
-			cout << "Äú»¹Ã»ÓĞ¹é»¹³äµç±¦£¬ÇëÏÈ¹é»¹" << endl;
+			cout << "æ‚¨è¿˜æ²¡æœ‰å½’è¿˜å……ç”µå®ï¼Œè¯·å…ˆå½’è¿˜" << endl;
 			goto case22;
 		}
 	default:
 		return 0;
 	}
 
-	//Ö§¸¶½çÃæ
+	//æ”¯ä»˜ç•Œé¢
 	pay:
-	cout << "µ±Ç°½çÃæÎªÖ§¸¶½çÃæ£¬Äú¿ÉÑ¡ÔñÒÔÏÂ²Ù×÷:" << endl;
+	cout << "å½“å‰ç•Œé¢ä¸ºæ”¯ä»˜ç•Œé¢ï¼Œæ‚¨å¯é€‰æ‹©ä»¥ä¸‹æ“ä½œ:" << endl;
 	i = 0;
-	for (auto c : interface[4]) {
+	for (auto c : user_interface[4]) {
 		cout << "[" << i++ << "]" << "	" << c << endl;
 	}
 	cin >> optcode;
@@ -223,10 +221,10 @@ case22:
 		return 0;
 	case 1:
 		if (user.IfReturn())
-			cout << "Äã±¾´ÎÏû·ÑµÄ½ğ¶îÎª£º" << user.CalculateCost(t1, t2) << endl;
+			cout << "ä½ æœ¬æ¬¡æ¶ˆè´¹çš„é‡‘é¢ä¸ºï¼š" << user.CalculateCost(t1, t2) << endl;
 		else {
 			t2 = time(&t);
-			cout << "Äã±¾´ÎÏû·ÑµÄ½ğ¶îÎª£º" << user.CalculateCost(t1, t2) << endl;
+			cout << "ä½ æœ¬æ¬¡æ¶ˆè´¹çš„é‡‘é¢ä¸ºï¼š" << user.CalculateCost(t1, t2) << endl;
 		}
 		goto pay;
 	case 2:
@@ -264,28 +262,3 @@ case22:
 
 
 
-
-
-
-
-
-
-
-/*std::string strValue = "{\"key1\":\"value1\",\"array\":[{\"key2\":\"value2\"},{\"key2\":\"value3\"},{\"key2\":\"value4\"}]}";
-Json::Reader reader;
-Json::Value value;
-if (reader.parse(strValue, value))
-{
-std::string out = value["key1"].asString();
-std::cout << out << std::endl;
-const Json::Value arrayObj = value["array"];
-for (int i = 0; i<arrayObj.size(); i++)
-{
-out = arrayObj[i]["key2"].asString();
-std::cout << out;
-if (i != arrayObj.size()-1)
-std::cout << std::endl;
-}
-}
-getchar();
-getchar();*/

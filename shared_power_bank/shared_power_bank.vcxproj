@@ -181,6 +181,7 @@
     <ClInclude Include="easySqlite\SqlValue.h" />
     <ClInclude Include="easySqlite\stdafx.h" />
     <ClInclude Include="easySqlite\targetver.h" />
+    <ClInclude Include="get_url.h" />
     <ClInclude Include="pow_bank.h" />
     <ClInclude Include="pow_bank_dep.h" />
     <ClInclude Include="dep_manager.h" />
@@ -192,6 +193,7 @@
     <ClCompile Include="..\..\..\..\Desktop\jsoncpp-master\src\lib_json\json_value.cpp" />
     <ClCompile Include="..\..\..\..\Desktop\jsoncpp-master\src\lib_json\json_writer.cpp" />
     <ClCompile Include="dep_manager.cpp" />
+    <ClCompile Include="get_url.cpp" />
     <ClCompile Include="location_service.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pow_bank.cpp" />

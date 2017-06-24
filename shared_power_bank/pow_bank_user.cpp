@@ -44,8 +44,6 @@ void PowBankUser::GetInfo(string name, string phone_number,string user_password)
 void PowBankUser::ShowInfo() {
 	cout << "您的姓名为" << user_name << endl;
 	cout << "您的电话号码为" << user_phone_number << endl;
-	GetLocation();
-	cout << "您当前的位置为：" << current_location.first << "," << current_location.second << endl;
 }
 void PowBankUser::GetLocation() {
 	current_location = LocService::GetLocation();

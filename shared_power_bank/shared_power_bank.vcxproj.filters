@@ -108,6 +108,9 @@
     <ClInclude Include="..\..\..\..\Desktop\jsoncpp-master\include\json\writer.h">
       <Filter>头文件\include/json</Filter>
     </ClInclude>
+    <ClInclude Include="get_url.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="location_service.cpp">
@@ -135,6 +138,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="pow_bank.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="get_url.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

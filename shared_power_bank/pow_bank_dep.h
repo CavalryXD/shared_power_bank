@@ -24,6 +24,9 @@ public:
 	{
 		return _coordinate;
 	}
+	int pow_bank_num() {
+		return _pow_bank_num;
+	}
 	PowBankDepository() {}
 	PowBankDepository(int dep_idf, string dep_loc_name, pair<float, float> coordinate, int pow_bank_num,
 		vector<int>chk_codes, vector<PowBank> dep);
