@@ -80,7 +80,7 @@ void PowBankUser::BorrowPow() {
 //	user_pow = chosen_dep->LendPowBank(chk_code);
 	/*while (user_pow == nullptr) {
 		cout << "您输入的验证码不正确";
-		cout << "是否要重新输入? yes or no" << endl;
+		cout << "是否要重新输入? 0 or 1" << endl;
 		string judge;
 		cin >> judge;
 		if (judge == "yes") {
@@ -112,6 +112,6 @@ void PowBankUser::ReturnPow() {
 void PowBankUser::CreateOrderform() {
 
 }
-float PowBankUser::CalculateCost() {
-	return 1;
+float PowBankUser::CalculateCost(time_t t1,time_t t2) {
+	return (t2-t1)*0.01;
 }

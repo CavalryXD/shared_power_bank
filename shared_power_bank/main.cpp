@@ -6,7 +6,8 @@
 #include <map>
 #include <algorithm>
 
-int optcode;
+int optcode;			//选择操作
+time_t t1,t2,t;		//借还时间，计算费用
 using namespace std;
 int main() {
 	//新版本
@@ -168,14 +169,17 @@ borrowandlend:
 	switch (optcode) {
 	case 0:
 		return 0;
+case21:
 	case 1:
 		user.ShowChkCode();
 		user.BorrowPow();
-		break;
+		t1=time(&t);
+		goto borrowandlend;
 case22:
 	case 2:
 		if (user.IfGetPow()) {
 			user.ReturnPow();
+			t2 = time(&t);
 		}
 		else {
 			cout << "您还没有借充电宝，不需要归还" << endl;
@@ -184,7 +188,7 @@ case22:
 			if (optcode == 0)
 				goto borrowandlend;
 			if (optcode == 1)
-				goto case22;
+				goto case21;
 		}
 		break;
 	case 3:
@@ -218,11 +222,16 @@ case22:
 	case 0:
 		return 0;
 	case 1:
-		cout << "你本次消费的金额为：" <<user.CalculateCost()<< endl;
-		break;
+		if (user.IfReturn())
+			cout << "你本次消费的金额为：" << user.CalculateCost(t1, t2) << endl;
+		else {
+			t2 = time(&t);
+			cout << "你本次消费的金额为：" << user.CalculateCost(t1, t2) << endl;
+		}
+		goto pay;
 	case 2:
 		user.ShowMoney();
-		break;
+		goto pay;
 	case 3:
 		goto user_;
 	default:
