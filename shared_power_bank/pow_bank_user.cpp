@@ -4,7 +4,7 @@
 #include "pow_bank_user.h"
 #include "location_service.h"
 #include "dep_manager.h"
-
+#include <iomanip>
 using namespace std;
 bool PowBankUser::SignUp() {				//注册
 	cout << "请输入您的名字，email和密码，中间用回车分隔" << endl;
@@ -12,10 +12,10 @@ bool PowBankUser::SignUp() {				//注册
 	cin >> user_name;
 	cout << "请输入您的email：";
 	cin >> user_email;
-	cout << "请输入您的密码：";
+	cout << "请输入您的密码：" ;
 	cin >> password;
 	//get请求
-	string s = "GET /user/register?username=" + user_name + "&passwd=" + password +"&passwd="+ user_email+" HTTP/1.1\nHost:192.168.31.97:5000\n\n";
+	string s = "GET /user/register?username=" + user_name + "&passwd=" + password +"&email="+ user_email+" HTTP/1.1\nHost:192.168.31.97:5000\n\n";
 	Json::Value value = GetUrl::Get(s);
 	if (value["status"].asString() == "200")
 	{
@@ -32,7 +32,7 @@ bool PowBankUser::SignIn() {			//登陆
 	cout << "请输入您的名字和密码，中间用回车分隔" << endl;
 	cout << "请输入您的名字：";
 	cin >> name;
-	cout << "请输入您的密码：";
+	cout << "请输入您的密码：" ;
 	cin >> word;
 	string s = "GET /user/login?username=" + name + "&passwd=" + word + " HTTP/1.1\nHost:192.168.31.97:5000\n\n";
 	Json::Value value = GetUrl::Get(s);
@@ -40,6 +40,8 @@ bool PowBankUser::SignIn() {			//登陆
 	{
 		user_name = name;
 		password = word;
+		balance = value["message"]["balance"].asFloat();
+		user_email= value["message"]["email"].asString();
 		return true;
 	}
 	else
@@ -52,17 +54,20 @@ void PowBankUser::GetInfo(string name, string phone_number,string user_password)
 	user_email = phone_number;
 }
 void PowBankUser::ShowInfo() {
-	cout << "您的姓名为" << user_name << endl;
-	cout << "您的email为" << user_email << endl;
+	cout << "您的姓名为:      " << user_name << endl;
+	cout << "您的email为:     " << user_email << endl;
+	cout << endl;
 }
 void PowBankUser::GetLocation() {
 	current_location = LocService::GetLocation();
 }
 void PowBankUser::GetMoney(float t) {
+	
 	balance = t;
 }
 void PowBankUser::ShowMoney() {
 	cout << "您当前的余额为：" << balance << endl;
+	cout << endl;
 }
 void PowBankUser::ChoosePowDep() {
 	cout << "以下是您周围的充电宝存放点" << endl;
@@ -72,7 +77,7 @@ void PowBankUser::ChoosePowDep() {
 		cout << "查询失败" << endl;
 	else
 		for (int i = 0; i < value["message"].size(); ++i) {
-			cout <<"您当前的位置处于：			"<< value["message"][i]["location"].asString()<< "经度：" << value["message"][i]["coordinate"]["lng"].asString() << "纬度：" << value["message"][i]["coordinate"]["lat"].asString() << endl;
+			cout <<"存放机编号："<< setw(2)<<value["message"][i]["id"].asString()<<"号    "<<"存放机位置："<< setw(10)<<value["message"][i]["location"].asString()<< "        经度：" <<setw(-5)<< (value["message"][i]["coordinate"]["lng"].asString()).substr(0,5) << "  纬度：" <<setw(-4)<< (value["message"][i]["coordinate"]["lat"].asString()).substr(0,4) << endl;
 		}
 	cout << "请输入您想选择的存放机的编号" << endl;
 	string number;
@@ -80,13 +85,13 @@ void PowBankUser::ChoosePowDep() {
 	pow_deposit_number = number;		//用户所选择的存放机编号
 }
 void PowBankUser::GetChkCode() {
-	string s1 = "xd";
-	string s = "GET /depositories/checkcode?username=" + s1+"&id=" + pow_deposit_number+ " HTTP/1.1\nHost:192.168.31.97:5000\n\n";
+	string s = "GET /depositories/checkcode?username=" + user_name+"&id=" + pow_deposit_number+ " HTTP/1.1\nHost:192.168.31.97:5000\n\n";
 	Json::Value value= GetUrl::Get(s);
 	chk_code = value["message"]["chkcode"].asString();
 }
 string PowBankUser::ShowChkCode() {
 	cout << "您的验证码是："<< chk_code << endl;
+	cout << endl;
 	return chk_code;
 }
 bool PowBankUser::BorrowPow() {

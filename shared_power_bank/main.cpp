@@ -24,11 +24,11 @@ int main() {
 	user_interface.push_back(vector<string>{"退出程序", "注册新用户","现在登陆"});
 	//登陆后直接进入用户界面
 	user_interface.push_back(vector<string>{"退出程序", "显示用户信息","显示以往的验证码","显示当前余额","打开选择存放机界面"});
-	user_interface.push_back(vector<string>{"退出程序", "选择存放机","打开借还界面"});
+	user_interface.push_back(vector<string>{"退出程序", "选择存放机", "回到用户界面"});
 	user_interface.push_back(vector<string>{"退出程序", "借一个充电宝","归还一个充电宝","显示当前验证码","回到选择存放机器界面","回到用户界面","打开支付界面"});
 	user_interface.push_back(vector<string>{"退出程序", "查看本次消费金额","查看您的余额","回到用户界面"});
 	
-
+log:
 	cout << "当前界面为入口界面，您可选择以下操作:" << endl;
 	int i = 0;
 	for (auto c : user_interface[0]) {
@@ -54,12 +54,12 @@ int main() {
 			if (optcode == 1)
 				goto case11;
 			else
-				return 0;
+				goto log;
 		}
 		cout << "请问您要现在登陆吗？ 0 or 1" << endl;
 		cin >> optcode;
 		if (optcode != 1)
-			return 0;
+			goto log;
 		if (optcode == 1)
 			goto case12;
 		
@@ -83,7 +83,8 @@ int main() {
 		break;
 	}
 	default:
-		return 0;
+		cout << "您输入的有误，请重新输入！" << endl;
+		goto log;
 		
 	}
 
@@ -112,7 +113,8 @@ int main() {
 	case 4:
 		goto repositry;
 	default:
-		return 0;
+		cout << "您输入的有误，请重新输入！" << endl;
+		goto user_;
 	}
 
 	//存放机界面
@@ -126,26 +128,16 @@ repositry:
 	switch (optcode) {
 	case 0:
 		return 0;
+casechose:
 	case 1:
 		user.GetLocation();
 		user.ChoosePowDep();
 		break;
 	case 2:
-		if (user.IfGetPowDep())
-			goto borrowandlend;
-		else {
-			cout << "您还没有选择一个存放机" << endl;
-			cout << "是否要选择一个存放机? 0 or 1" << endl;
-			cin >> optcode;
-			if (optcode == 0) {
-				goto repositry;
-			}
-			if (optcode == 1)
-				goto borrowandlend;
-		}
-		break;
+		goto user_;
 	default:
-		return 0;
+		cout << "您输入的有误，请重新输入！" << endl;
+		goto repositry;
 	}
 
 	//借还界面
@@ -191,6 +183,13 @@ case22:
 	case 5:
 		goto user_;
 	case 6:
+		if (!user.IfGetPow())
+			cout << "您还没有借充电宝，请问要现在去借一个吗？ 0 or 1" << endl;
+		cin>>optcode;
+		if (optcode != 1)
+			goto borrowandlend;
+		else
+			goto case21;
 		if (user.IfReturn())
 			goto pay;
 		else
@@ -199,7 +198,8 @@ case22:
 			goto case22;
 		}
 	default:
-		return 0;
+		cout << "您输入的有误，请重新输入！" << endl;
+		goto borrowandlend;
 	}
 
 	//支付界面
@@ -227,8 +227,8 @@ case22:
 	case 3:
 		goto user_;
 	default:
-		return 0;
-
+		cout << "您输入的有误，请重新输入！" << endl;
+		goto pay;
 	}
 
 	getchar();
