@@ -6,6 +6,7 @@
 #include "dep_manager.h"
 #include <iomanip>
 using namespace std;
+string U2G(const char* utf8);
 bool PowBankUser::SignUp() {				//注册
 	cout << "请输入您的名字，email和密码，中间用回车分隔" << endl;
 	cout << "请输入您的名字：";
@@ -101,7 +102,7 @@ void PowBankUser::ChoosePowDep() {
 		cout << "查询失败" << endl;
 	else
 		for (int i = 0; i < value["message"].size(); ++i) {
-			cout <<"存放机编号："<< setw(2)<<value["message"][i]["id"].asString()<<"号    "<<"存放机位置："<< setw(10)<<value["message"][i]["location"].asString()<< "        经度：" <<setw(-5)<< (value["message"][i]["coordinate"]["lng"].asString()).substr(0,5) << "  纬度：" <<setw(-4)<< (value["message"][i]["coordinate"]["lat"].asString()).substr(0,4) << endl;
+			cout <<"存放机编号："<< setw(2)<<value["message"][i]["id"].asString()<<"号    "<<"存放机位置："<< setw(8)<<U2G(value["message"][i]["location"].asCString())<< "        经度：" <<setw(-5)<< (value["message"][i]["coordinate"]["lng"].asString()).substr(0,5) << "  纬度：" <<setw(-4)<< (value["message"][i]["coordinate"]["lat"].asString()).substr(0,4) << endl;
 		}
 	cout << "请输入您想选择的存放机的编号" << endl;
 	string number;
@@ -186,3 +187,23 @@ void PowBankUser::PayCost(float cost) {
 	Json::Value value1 = GetUrl::Get(s1);
 	balance = value1["message"]["balance"].asFloat() - cost;
 }
+
+
+
+
+
+
+string U2G(const char* utf8)
+{
+	int len = MultiByteToWideChar(CP_UTF8, 0, utf8, -1, NULL, 0);
+	wchar_t* wstr = new wchar_t[len + 1];
+	memset(wstr, 0, len + 1);
+	MultiByteToWideChar(CP_UTF8, 0, utf8, -1, wstr, len);
+	len = WideCharToMultiByte(CP_ACP, 0, wstr, -1, NULL, 0, NULL, NULL);
+	char* str = new char[len + 1];
+	memset(str, 0, len + 1);
+	WideCharToMultiByte(CP_ACP, 0, wstr, -1, str, len, NULL, NULL);
+	if (wstr) delete[] wstr;
+	return string(str);
+}
+
