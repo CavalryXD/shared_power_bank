@@ -23,9 +23,9 @@ int main() {
 	
 	user_interface.push_back(vector<string>{"退出程序", "注册新用户","现在登陆"});
 	//登陆后直接进入用户界面
-	user_interface.push_back(vector<string>{"退出程序", "显示用户信息","给账户充值","显示当前余额","打开选择存放机界面"});
+	user_interface.push_back(vector<string>{"退出程序", "显示用户信息","给账户充值","显示当前余额","打开选择存放机界面","注销当前账户"});
 	user_interface.push_back(vector<string>{"退出程序", "选择存放机", "回到用户界面"});
-	user_interface.push_back(vector<string>{"退出程序", "借一个充电宝","归还一个充电宝","显示当前验证码","回到选择存放机器界面","回到用户界面","打开支付界面"});
+	user_interface.push_back(vector<string>{"退出程序", "借一个充电宝","归还一个充电宝","查看已消费金额","回到选择存放机器界面","回到用户界面","打开支付界面"});
 	user_interface.push_back(vector<string>{"退出程序", "查看本次消费金额","查看您的余额","给账户充值","回到用户界面"});
 	
 log:
@@ -112,6 +112,9 @@ log:
 		break;
 	case 4:
 		goto repositry;
+	case 5:
+		cout << "您已成功注销！即将返回到起始页面" << endl;
+		goto log;
 	default:
 		cout << "您输入的有误，请重新输入！" << endl;
 		goto user_;
@@ -176,7 +179,8 @@ case22:
 		}
 		break;
 	case 3:
-		user.ShowChkCode();
+		t2 = time(&t);
+		cout << "您已消费了"<<user.CalculateCost(t1,t2) <<"元"<< endl;
 		goto borrowandlend;
 	case 4:
 		goto repositry;
@@ -195,8 +199,11 @@ case22:
 				goto pay;
 		else
 		{
-			cout << "您还没有归还充电宝，请先归还" << endl;
-			goto case22;
+			cout << "您还没有归还充电宝 请问现在要归还吗？ 0 or 1" << endl;
+			if ((cin >> optcode) && optcode != 1)
+				goto borrowandlend;
+			else
+				goto pay;
 		}
 	default:
 		cout << "您输入的有误，请重新输入！" << endl;
@@ -216,7 +223,10 @@ case22:
 		return 0;
 	case 1:
 		if (user.IfReturn())
+		{
 			cout << "你本次消费的金额为：" << user.CalculateCost(t1, t2) << endl;
+			user.PayCost(user.CalculateCost(t1, t2));
+		}
 		else {
 			t2 = time(&t);
 			cout << "你本次消费的金额为：" << user.CalculateCost(t1, t2) << endl;

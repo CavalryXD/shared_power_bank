@@ -24,7 +24,7 @@ public:
 	bool IfGetPowDep();								//判断用户是否选择了存放及
 	void ReturnPow();								//归还充电宝
 	float CalculateCost(time_t t1,time_t t2);		//计算费用
-
+	void PayCost(float);									//从数据库中扣除费用
 private:
 	string user_name;
 	string user_email;

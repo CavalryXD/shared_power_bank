@@ -88,6 +88,7 @@ bool PowBankUser::ReCharge(){
 	else {
 		string s = "GET /user/charge?username=" + user_name + "&passwd=" + password + "&money="+to_string(money)+" HTTP/1.1\nHost:192.168.31.97:5000\n\n";
 		Json::Value value = GetUrl::Get(s);
+		balance += money;
 		cout << "恭喜您，充值成功！" << endl;
 		return true;
 	}
@@ -106,6 +107,7 @@ void PowBankUser::ChoosePowDep() {
 	string number;
 	cin >> number;						//存放机编号
 	pow_deposit_number = number;		//用户所选择的存放机编号
+
 }
 void PowBankUser::GetChkCode() {
 	string s = "GET /depositories/checkcode?username=" + user_name+"&id=" + pow_deposit_number+ " HTTP/1.1\nHost:192.168.31.97:5000\n\n";
@@ -139,7 +141,7 @@ bool PowBankUser::BorrowPow() {
 	int opt;
 	reborrow:
 	string code;
-	cout << "验证码以显示在存放机上，请在当前界面输入验证码" << endl;
+	cout << "验证码已显示在存放机上，请在当前界面输入验证码" << endl;
 	cin >> code;
 	string s = "GET /depositories/check?chkcode=" + code + "&id=" + pow_deposit_number + " HTTP/1.1\nHost:192.168.31.97:5000\n\n";
 	Json::Value value = GetUrl::Get(s);
@@ -175,8 +177,12 @@ void PowBankUser::ReturnPow() {
 }
 
 float PowBankUser::CalculateCost(time_t t1,time_t t2) {
-	string s = "GET /user/pay?username=" + user_name+"&passwd="+password+"&payment="+ to_string((t2 - t1)*0.01)+ " HTTP/1.1\nHost:192.168.31.97:5000\n\n";
-	Json::Value value = GetUrl::Get(s);
-	balance -= (t2 - t1)*0.01;				//计算剩下余额
 	return (t2-t1)*0.01;
+}
+void PowBankUser::PayCost(float cost) {
+	string s = "GET /user/pay?username=" + user_name + "&passwd=" + password + "&payment=" + to_string(cost) + " HTTP/1.1\nHost:192.168.31.97:5000\n\n";
+	Json::Value value = GetUrl::Get(s);
+	string s1 = "GET /user/login?username=" + user_name + "&passwd=" + password + " HTTP/1.1\nHost:192.168.31.97:5000\n\n";
+	Json::Value value1 = GetUrl::Get(s1);
+	balance = value1["message"]["balance"].asFloat() - cost;
 }
