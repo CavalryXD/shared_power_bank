@@ -14,6 +14,7 @@ public:
 	void GetLocation();								//得到当前位置
 	void GetMoney(float);							//getmoney
 	void ShowMoney();								//显示当前余额
+	bool ReCharge();								//充钱
 	void ChoosePowDep();							//选择存放机
 	void GetChkCode();								//从存放机管理系统得到验证码
 	string ShowChkCode();							//返回验证码给借出存放机

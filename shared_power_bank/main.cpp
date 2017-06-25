@@ -23,10 +23,10 @@ int main() {
 	
 	user_interface.push_back(vector<string>{"退出程序", "注册新用户","现在登陆"});
 	//登陆后直接进入用户界面
-	user_interface.push_back(vector<string>{"退出程序", "显示用户信息","显示以往的验证码","显示当前余额","打开选择存放机界面"});
+	user_interface.push_back(vector<string>{"退出程序", "显示用户信息","给账户充值","显示当前余额","打开选择存放机界面"});
 	user_interface.push_back(vector<string>{"退出程序", "选择存放机", "回到用户界面"});
 	user_interface.push_back(vector<string>{"退出程序", "借一个充电宝","归还一个充电宝","显示当前验证码","回到选择存放机器界面","回到用户界面","打开支付界面"});
-	user_interface.push_back(vector<string>{"退出程序", "查看本次消费金额","查看您的余额","回到用户界面"});
+	user_interface.push_back(vector<string>{"退出程序", "查看本次消费金额","查看您的余额","给账户充值","回到用户界面"});
 	
 log:
 	cout << "当前界面为入口界面，您可选择以下操作:" << endl;
@@ -104,7 +104,7 @@ log:
 			goto user_;
 		break;
 	case 2:
-		user.ShowChkCode();
+		user.ReCharge();
 		goto user_;
 	case 3:
 		user.ShowMoney();
@@ -184,14 +184,15 @@ case22:
 		goto user_;
 	case 6:
 		if (!user.IfGetPow())
+		{
 			cout << "您还没有借充电宝，请问要现在去借一个吗？ 0 or 1" << endl;
-		cin>>optcode;
-		if (optcode != 1)
-			goto borrowandlend;
-		else
-			goto case21;
+			if ((cin >> optcode) && optcode != 1)
+				goto borrowandlend;
+			else
+				goto case21;
+		}
 		if (user.IfReturn())
-			goto pay;
+				goto pay;
 		else
 		{
 			cout << "您还没有归还充电宝，请先归还" << endl;
@@ -225,6 +226,10 @@ case22:
 		user.ShowMoney();
 		goto pay;
 	case 3:
+		user.ReCharge();
+		cout << endl;
+		goto pay;
+	case 4:
 		goto user_;
 	default:
 		cout << "您输入的有误，请重新输入！" << endl;

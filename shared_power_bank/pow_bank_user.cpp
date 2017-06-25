@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <string>
 #include <vector>
 #include "pow_bank_user.h"
@@ -6,15 +6,15 @@
 #include "dep_manager.h"
 #include <iomanip>
 using namespace std;
-bool PowBankUser::SignUp() {				//×¢²á
-	cout << "ÇëÊäÈëÄúµÄÃû×Ö£¬emailºÍÃÜÂë£¬ÖĞ¼äÓÃ»Ø³µ·Ö¸ô" << endl;
-	cout << "ÇëÊäÈëÄúµÄÃû×Ö£º";
+bool PowBankUser::SignUp() {				//æ³¨å†Œ
+	cout << "è¯·è¾“å…¥æ‚¨çš„åå­—ï¼Œemailå’Œå¯†ç ï¼Œä¸­é—´ç”¨å›è½¦åˆ†éš”" << endl;
+	cout << "è¯·è¾“å…¥æ‚¨çš„åå­—ï¼š";
 	cin >> user_name;
-	cout << "ÇëÊäÈëÄúµÄemail£º";
+	cout << "è¯·è¾“å…¥æ‚¨çš„emailï¼š";
 	cin >> user_email;
-	cout << "ÇëÊäÈëÄúµÄÃÜÂë£º" ;
+	cout << "è¯·è¾“å…¥æ‚¨çš„å¯†ç ï¼š" ;
 	cin >> password;
-	//getÇëÇó
+	//getè¯·æ±‚
 	string s = "GET /user/register?username=" + user_name + "&passwd=" + password +"&email="+ user_email+" HTTP/1.1\nHost:192.168.31.97:5000\n\n";
 	Json::Value value = GetUrl::Get(s);
 	if (value["status"].asString() == "200")
@@ -25,14 +25,14 @@ bool PowBankUser::SignUp() {				//×¢²á
 		return false;
 	return false;
 }
-bool PowBankUser::SignIn() {			//µÇÂ½
+bool PowBankUser::SignIn() {			//ç™»é™†
 	string name;
 	string word;
-	//getÇëÇó
-	cout << "ÇëÊäÈëÄúµÄÃû×ÖºÍÃÜÂë£¬ÖĞ¼äÓÃ»Ø³µ·Ö¸ô" << endl;
-	cout << "ÇëÊäÈëÄúµÄÃû×Ö£º";
+	//getè¯·æ±‚
+	cout << "è¯·è¾“å…¥æ‚¨çš„åå­—å’Œå¯†ç ï¼Œä¸­é—´ç”¨å›è½¦åˆ†éš”" << endl;
+	cout << "è¯·è¾“å…¥æ‚¨çš„åå­—ï¼š";
 	cin >> name;
-	cout << "ÇëÊäÈëÄúµÄÃÜÂë£º" ;
+	cout << "è¯·è¾“å…¥æ‚¨çš„å¯†ç ï¼š" ;
 	cin >> word;
 	string s = "GET /user/login?username=" + name + "&passwd=" + word + " HTTP/1.1\nHost:192.168.31.97:5000\n\n";
 	Json::Value value = GetUrl::Get(s);
@@ -48,14 +48,14 @@ bool PowBankUser::SignIn() {			//µÇÂ½
 		return false;
 }
 void PowBankUser::GetInfo(string name, string phone_number,string user_password) {
-	//todo Á´½ÓÍøÂç
+	//todo é“¾æ¥ç½‘ç»œ
 	user_name = name;
 	password = user_password;
 	user_email = phone_number;
 }
 void PowBankUser::ShowInfo() {
-	cout << "ÄúµÄĞÕÃûÎª:      " << user_name << endl;
-	cout << "ÄúµÄemailÎª:     " << user_email << endl;
+	cout << "æ‚¨çš„å§“åä¸º:      " << user_name << endl;
+	cout << "æ‚¨çš„emailä¸º:     " << user_email << endl;
 	cout << endl;
 }
 void PowBankUser::GetLocation() {
@@ -66,23 +66,46 @@ void PowBankUser::GetMoney(float t) {
 	balance = t;
 }
 void PowBankUser::ShowMoney() {
-	cout << "Äúµ±Ç°µÄÓà¶îÎª£º" << balance << endl;
+	cout << "æ‚¨å½“å‰çš„ä½™é¢ä¸ºï¼š" ;
+	string s = "GET /user/login?username=" + user_name + "&passwd=" + password + " HTTP/1.1\nHost:192.168.31.97:5000\n\n";
+	Json::Value value = GetUrl::Get(s);
+	balance = value["message"]["balance"].asFloat();
+	cout << balance << endl;
 	cout << endl;
 }
+bool PowBankUser::ReCharge(){
+	charge:
+	float money;
+	cout << "æ¬¢è¿æ¥åˆ°å……å€¼ç•Œé¢ï¼Œè¯·è¾“å…¥æ‚¨è¦å……å€¼çš„é‡‘é¢" << endl;
+	if (!(cin >> money) && money < 0) {
+		cout << "æ‚¨è¾“å…¥çš„æœ‰è¯¯,éœ€è¦é‡æ–°è¾“å…¥å—ï¼Ÿ 0 or 1" << endl;
+		int code=0;
+		if ((!cin >> code) &&code != 1)
+			return false;
+		else
+			goto charge;
+	}
+	else {
+		string s = "GET /user/charge?username=" + user_name + "&passwd=" + password + "&money="+to_string(money)+" HTTP/1.1\nHost:192.168.31.97:5000\n\n";
+		Json::Value value = GetUrl::Get(s);
+		cout << "æ­å–œæ‚¨ï¼Œå……å€¼æˆåŠŸï¼" << endl;
+		return true;
+	}
+}
 void PowBankUser::ChoosePowDep() {
-	cout << "ÒÔÏÂÊÇÄúÖÜÎ§µÄ³äµç±¦´æ·Åµã" << endl;
+	cout << "ä»¥ä¸‹æ˜¯æ‚¨å‘¨å›´çš„å……ç”µå®å­˜æ”¾ç‚¹" << endl;
 	string s = "GET /depositories?username=" + user_name+ " HTTP/1.1\nHost:192.168.31.97:5000\n\n";
 	Json::Value value = GetUrl::Get(s);
 	if (value["status"] == "404")
-		cout << "²éÑ¯Ê§°Ü" << endl;
+		cout << "æŸ¥è¯¢å¤±è´¥" << endl;
 	else
 		for (int i = 0; i < value["message"].size(); ++i) {
-			cout <<"´æ·Å»ú±àºÅ£º"<< setw(2)<<value["message"][i]["id"].asString()<<"ºÅ    "<<"´æ·Å»úÎ»ÖÃ£º"<< setw(10)<<value["message"][i]["location"].asString()<< "        ¾­¶È£º" <<setw(-5)<< (value["message"][i]["coordinate"]["lng"].asString()).substr(0,5) << "  Î³¶È£º" <<setw(-4)<< (value["message"][i]["coordinate"]["lat"].asString()).substr(0,4) << endl;
+			cout <<"å­˜æ”¾æœºç¼–å·ï¼š"<< setw(2)<<value["message"][i]["id"].asString()<<"å·    "<<"å­˜æ”¾æœºä½ç½®ï¼š"<< setw(10)<<value["message"][i]["location"].asString()<< "        ç»åº¦ï¼š" <<setw(-5)<< (value["message"][i]["coordinate"]["lng"].asString()).substr(0,5) << "  çº¬åº¦ï¼š" <<setw(-4)<< (value["message"][i]["coordinate"]["lat"].asString()).substr(0,4) << endl;
 		}
-	cout << "ÇëÊäÈëÄúÏëÑ¡ÔñµÄ´æ·Å»úµÄ±àºÅ" << endl;
+	cout << "è¯·è¾“å…¥æ‚¨æƒ³é€‰æ‹©çš„å­˜æ”¾æœºçš„ç¼–å·" << endl;
 	string number;
-	cin >> number;						//´æ·Å»ú±àºÅ
-	pow_deposit_number = number;		//ÓÃ»§ËùÑ¡ÔñµÄ´æ·Å»ú±àºÅ
+	cin >> number;						//å­˜æ”¾æœºç¼–å·
+	pow_deposit_number = number;		//ç”¨æˆ·æ‰€é€‰æ‹©çš„å­˜æ”¾æœºç¼–å·
 }
 void PowBankUser::GetChkCode() {
 	string s = "GET /depositories/checkcode?username=" + user_name+"&id=" + pow_deposit_number+ " HTTP/1.1\nHost:192.168.31.97:5000\n\n";
@@ -90,36 +113,49 @@ void PowBankUser::GetChkCode() {
 	chk_code = value["message"]["chkcode"].asString();
 }
 string PowBankUser::ShowChkCode() {
-	cout << "ÄúµÄÑéÖ¤ÂëÊÇ£º"<< chk_code << endl;
+	cout << "æ‚¨çš„éªŒè¯ç æ˜¯ï¼š"<< chk_code << endl;
 	cout << endl;
 	return chk_code;
 }
 bool PowBankUser::BorrowPow() {
+	if (balance == 0) {
+		cout << "æ‚¨å½“å‰ä½™é¢ä¸è¶³ï¼Œè¯·å…ˆå……å€¼ 0 or 1" << endl;
+		int code = 0;
+		if ((cin >> code) && code != 1)
+			return false;
+		else
+		{
+			bool chargeornot = ReCharge();
+			if (chargeornot)
+				return true;
+			else
+				return false;
+		}
+	}
 	if (times ==1) {
-		cout << "ÄúÒÑ¾­½èÁËÒ»¸ö³äµç±¦ÁË£¬ÎŞ·¨¼ÌĞø½è³ö£¡" << endl;
+		cout << "æ‚¨å·²ç»å€Ÿäº†ä¸€ä¸ªå……ç”µå®äº†ï¼Œæ— æ³•ç»§ç»­å€Ÿå‡ºï¼" << endl;
 		return false;
 	}
 	int opt;
 	reborrow:
 	string code;
-	cout << "ÑéÖ¤ÂëÒÔÏÔÊ¾ÔÚ´æ·Å»úÉÏ£¬ÇëÔÚµ±Ç°½çÃæÊäÈëÑéÖ¤Âë" << endl;
+	cout << "éªŒè¯ç ä»¥æ˜¾ç¤ºåœ¨å­˜æ”¾æœºä¸Šï¼Œè¯·åœ¨å½“å‰ç•Œé¢è¾“å…¥éªŒè¯ç " << endl;
 	cin >> code;
 	string s = "GET /depositories/check?chkcode=" + code + "&id=" + pow_deposit_number + " HTTP/1.1\nHost:192.168.31.97:5000\n\n";
 	Json::Value value = GetUrl::Get(s);
 	string status = value["status"].asString();
 	if (status == "200") {
-		cout << "ÄúÒÑ³É¹¦½è³ö³äµç±¦£¬Çë¾¡¿ìÈ¡³ö£¡" << endl;
+		cout << "æ‚¨å·²æˆåŠŸå€Ÿå‡ºå……ç”µå®ï¼Œè¯·å°½å¿«å–å‡ºï¼" << endl;
 		chk_code = code;
 		times = 1;
 		get_pow= true;
 		return true;
 	}
 	else {
-		cout << "ÄúÊäÈëµÄÑéÖ¤ÂëÓĞÎó ĞèÒªÖØĞÂÊäÈëÂğ£¿ 0 or 1" << endl;
-		cin >> opt;
-		if (opt != 1)
+		cout << "æ‚¨è¾“å…¥çš„éªŒè¯ç æœ‰è¯¯ éœ€è¦é‡æ–°è¾“å…¥å—ï¼Ÿ 0 or 1" << endl;
+		if (cin >> opt&&opt != 1)
 			return false;
-		if (opt == 1)
+		else
 			goto reborrow;
 	}	
 }
@@ -139,8 +175,8 @@ void PowBankUser::ReturnPow() {
 }
 
 float PowBankUser::CalculateCost(time_t t1,time_t t2) {
-	string s = "GET /user/pay?username=" + user_name+"&password="+password+"&payment="+ "(t2 - t1)*0.01"+ " HTTP/1.1\nHost:192.168.31.97:5000\n\n";
+	string s = "GET /user/pay?username=" + user_name+"&passwd="+password+"&payment="+ to_string((t2 - t1)*0.01)+ " HTTP/1.1\nHost:192.168.31.97:5000\n\n";
 	Json::Value value = GetUrl::Get(s);
-	balance -= (t2 - t1)*0.01;				//¼ÆËãÊ£ÏÂÓà¶î
+	balance -= (t2 - t1)*0.01;				//è®¡ç®—å‰©ä¸‹ä½™é¢
 	return (t2-t1)*0.01;
 }
